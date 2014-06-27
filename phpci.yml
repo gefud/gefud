@@ -10,17 +10,17 @@ setup:
     composer:
         action: "install"
         prefer_dist: false
-    phing:
-        build_file: 'build.xml'
-        targets:
-          - "ci:run-tests"
-        properties:
-          config_file: "build.properties"
+#    phing:
+#        build_file: 'build.xml'
+#        targets:
+#          - "ci:run-tests"
+#        properties:
+#          config_file: "build.properties"
 
 test:
     php_unit:
-        directory: "test/"
-        args: "--bootstrap 'test/loader.php' --configuration 'test/phpunit.xml'"
+        directory: "test/unit/"
+        args: "--bootstrap 'test/bootstrap.php' --configuration 'test/phpunit.xml'"
     php_mess_detector:
         allow_failures: true
     php_cpd:

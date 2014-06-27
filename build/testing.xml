@@ -2,14 +2,20 @@
 <project name="Notilio\DDx - Testing" basedir="../">
 
     <target name="phpunit" description="Run all unit tests with PHPUnit">
-        <exec dir="${basedir}/tests/unit/" executable="${basedir}/bin/phpunit" failonerror="true">
-            <arg value="--testdox-html" />
-            <arg path="${basedir}/build/logs/unit/testdox.html" />
-        </exec>
+	<phpunit bootstrap="tests/bootstrap.php" haltonfailure="true" printsummary="true">
+	    <formatter type="plain" usefile="false" />
+	    <batchtest>
+	        <fileset dir="tests">
+		    <include name="**/*Test.php" />
+		</fileset>
+	    </batchtest>
+	    <formatter type="xml" todir="build/coverage" outfile="logfile.xml" />
+	</phpunit>
+	<phpunitreport infile="build/coverage/logfile.xml" styledir="/usr/share/php/data/phing/etc" format="frames" todir="build/coverage" />
     </target>
 
     <target name="behat" description="Run system tests with behat except those requiring javascript interaction." depends="prepare">
-        <exec dir="${basedir}" executable="${basedir}/bin/behat" failonerror="true">
+        <exec dir="${basedir}" executable="${basedir}/bin/behat">
             <arg value="--tags=~@javascript" />
             <arg value="--config=${basedir}/tests/system/behat.yml" />
             <arg value="--format=html,progress" />
@@ -18,7 +24,7 @@
     </target>
 
     <target name="behat:js" description="Run system tests with behat except those requiring javascript interaction." depends="prepare, phantom:stop, phantom:start">
-        <exec dir="${basedir}" executable="${basedir}/bin/behat" failonerror="true">
+        <exec dir="${basedir}" executable="${basedir}/bin/behat">
             <arg value="--tags=@javascript" />
             <arg value="--config=${basedir}/tests/system/behat.yml" />
             <arg value="--profile=phantomjs" />
@@ -29,7 +35,7 @@
     </target>
 
     <target name="phantom:start">
-        <exec executable="phantomjs" failonerror="false" spawn="true">
+        <exec executable="phantomjs" spawn="true">
             <arg value="--webdriver=8643" />
         </exec>
         <echo message="==========================" />
@@ -38,10 +44,10 @@
     </target>
 
     <target name="phantom:stop">
-        <exec executable="pgrep" failonerror="false" outputproperty="phantom.process">
+        <exec executable="pgrep" outputproperty="phantom.process">
             <arg value="phantomjs" />
         </exec>
-        <exec executable="kill" failonerror="false">
+        <exec executable="kill">
             <arg value="${phantom.process}" />
         </exec>
         <echo message="=========================" />
