@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Notilio\DDx" default="help">
+    <import file="build/code-quality.xml" />
+    <import file="build/composer.xml" />
+    <import file="build/testing.xml" />
+    <property file="build.properties" />
+
+    <target name="help" description="Display detailed usage information">
+        <echo>Type "phing -l" or "ant -p" to see a list of targets</echo>
+    </target>
+
+    <target name="bootstrap" description="Sets up this project">
+        <antcall target="clean:vendor" />
+        <antcall target="composer:dev" />
+    </target>
+
+    <target name="build" depends="clean, prepare, phpunit" />
+    <target name="build:full" depends="build, phpcs, lint, phpdoc" />
+
+    <target name="clean" description="Cleanup build artifacts">
+        <delete dir="build/coverage" />
+        <delete dir="build/logs" />
+        <delete dir="build/docs" />
+    </target>
+
+    <target name="clean:vendor" description="Cleanup vendor artifacts">
+        <delete file="build-deploy/composer.phar" verbose="true" />
+        <delete dir="vendor" />
+        <delete dir="bin" />
+    </target>
+
+    <target name="prepare" description="Prepare for build">
+        <mkdir dir="build/coverage" />
+        <mkdir dir="build/logs" />
+        <mkdir dir="build/docs" />
+        <mkdir dir="bin" />
+    </target>
+
+    <target name="config:behat">
+        <copy file="build-deploy/config-template/behat.yml.template" tofile="tests/system/behat.yml" overwrite="true">
+            <filterset begintoken="{{" endtoken="}}">
+                <filtersfile file="build-deploy/config-template/behat.properties" />
+            </filterset>
+        </copy>
+    </target>
+
+    <target name="lint" description="Runs the php syntax check on entire code base">
+        <apply executable="php" failonerror="true">
+            <arg value="-l" />
+            <fileset dir="src/">
+                <include name="**/*.ph*" />
+            </fileset>
+        </apply>
+    </target>
+
+    <target name="phpdoc" description="Generate API documentation using phpDocumentor2">
+        <exec executable="phpdoc" failonerror="false">
+            <arg value="run" />
+            <arg value="--directory" />
+            <arg path="src/" />
+            <arg value="--target" />
+            <arg path="build/docs" />
+            <arg value="--title" />
+            <arg value="Notilio\DDx" />
+            <arg value="--ignore" />
+            <arg value="tests/*" />
+        </exec>
+    </target>
+
+</project>

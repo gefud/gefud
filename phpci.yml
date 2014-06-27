@@ -1,0 +1,46 @@
+build_settings:
+    verbose: true
+    prefer_symlink: false
+    ignore:
+      - vendor
+
+setup:
+    env:
+        APP_ENV: "test"
+    composer:
+        action: "install"
+        prefer_dist: false
+    phing:
+        build_file: 'build.xml'
+        targets:
+          - "ci:run-tests"
+        properties:
+          config_file: "build.properties"
+
+test:
+    php_unit:
+        directory: "test/"
+        args: "--bootstrap 'test/loader.php' --configuration 'test/phpunit.xml'"
+    php_mess_detector:
+        allow_failures: true
+    php_cpd:
+        allow_failures: true
+    php_code_sniffer:
+        path: "apps"
+#        ignore:
+#            - "apps/views"
+        standard: "PSR1,PSR2"
+
+failure:
+  email:
+    committer: true
+    cc: ["php-ci@brzuchalski.com"]
+
+#success:
+#    phing:
+#        build_file: 'build.xml'
+#        targets:
+#          - "deploy:test"
+#        properties:
+#          config_file: "build.properties"
+
