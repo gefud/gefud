@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+
+$autoload = dirname(dirname(dirname(__FILE__))) .'/autoload.php';
+if (file_exists($autoload)) {
+    require $autoload;
+} else {
+    require dirname(dirname(__FILE__)) .'/vendor/autoload.php';
+}
+
+use Notilio\DDx\Console\DDxCommand;
+use Symfony\Component\Console\Application;
+
+$application = new Application('Domain Driven Entity Generator', '0.1');
+$application->add(new DDxCommand);
+$application->run();

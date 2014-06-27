@@ -1,0 +1,32 @@
+{
+    "name": "notilio/ddx",
+    "description": "Domain Driven Generator",
+    "require": {
+        "mandango/mondator": "dev-master",
+	"symfony/console": "2.6.*@dev"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michał Brzuchalski",
+            "email": "michal.brzuchalski@gmail.com"
+        }
+    ],
+    "keywords": [
+        "dto",
+        "ddd",
+        "generator"
+    ],
+    "autoload": {
+        "psr-4": {
+            "Notilio\\DDx\\": "src/"
+        }
+    },
+    "config": {
+        "vendor-dir": "vendor/",
+        "bin-dir": "bin/"
+    },
+    "bin": [
+        "bin/ddx"
+    ]
+}
