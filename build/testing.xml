@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Notilio\DDx - Testing" basedir="../">
 
-    <target name="phpunit" description="Run all unit tests with PHPUnit">
-	<phpunit bootstrap="tests/bootstrap.php" haltonfailure="true" printsummary="true">
+    <target name="phpunit" description="Run all unit tests with PHPUnit" depends="prepare, composer">
+	<phpunit bootstrap="tests/bootstrap.php" printsummary="true">
 	    <formatter type="plain" usefile="false" />
 	    <batchtest>
 	        <fileset dir="tests">

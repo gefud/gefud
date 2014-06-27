@@ -64,7 +64,7 @@ EOF
 	    if ($name == 'id') {
 		continue;
 	    }
-	    $method[] = $this->createSetter($name, $type);
+	    $methods[] = $this->createSetter($name, $type);
 	}
         return $methods;
     }

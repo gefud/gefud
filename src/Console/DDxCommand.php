@@ -1,10 +1,10 @@
 <?php
 /**
- * DTOx
+ * DDx
  *
- * @copyright   Copyright (c) 2012, Jason Fox (jasonrobertfox.com)
+ * @copyright   Copyright (c) 2014, Notilio (notilio.com)
  * @license     http://opensource.org/licenses/MIT
- * @author      Jason Fox <jasonrobertfox@gmail.com>
+ * @author      Michał Brzuchalski <m.brzuchalski@notilio.com>
  */
 
 namespace Notilio\DDx\Console;
@@ -35,7 +35,13 @@ class DDxCommand extends Command
                 'variables',
                 InputArgument::IS_ARRAY,
                 'Specify your variables!'
-            );
+            )
+	    ->addOption(
+		'file',
+		null,
+		InputOption::VALUE_OPTIONAL,
+		'Specify destination file name'
+	    );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -73,7 +79,7 @@ class DDxCommand extends Command
             $variablesArray[$parts[1]] = $parts[0];
         }
         if (sizeof($variablesArray) == 0) {
-            throw new Exception('<error>Missed variable argument</error>');
+            throw new Exception('Missed variable argument');
         }
         $generator = new EntityGenerator($className, $nameSpace, $variablesArray);
         $directory = getcwd() .'/'.$this->getPath($fqcn);
@@ -83,6 +89,7 @@ class DDxCommand extends Command
         if (!is_dir($directory)) {
             mkdir($directory, 0777, true);
         }
+	// TODO: Implement file name customization
         file_put_contents($directory.'/'.$className.'.php', $generator->generate());
         return "Done!";
     }
