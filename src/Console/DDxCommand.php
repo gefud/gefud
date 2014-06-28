@@ -14,7 +14,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Notilio\DDx\Generator\EntityGenerator;
+use Notilio\DDx\Generator\EntityClassGenerator;
 use Exception;
 
 /**
@@ -50,7 +50,7 @@ class DDxCommand extends Command
         $className = $this->getClassName($input->getArgument('fqcn'));
         $path = $this->getPath($input->getArgument('fqcn'));
         $output->writeln("Creating a new entity called $className in $path...");
-	$text = $this->generate($input->getArgument('fqcn'), $input->getArgument('variables'));
+	    $text = $this->generate($input->getArgument('fqcn'), $input->getArgument('variables'));
         $output->writeln($text);
     }
 
@@ -76,12 +76,18 @@ class DDxCommand extends Command
         $variablesArray = array();
         foreach ($variables as $variableString) {
             $parts = explode(':', $variableString);
-            $variablesArray[$parts[1]] = $parts[0];
+            $variablesArray[$parts[1]] = [
+                'name' => $parts[1],
+                'type' => $parts[0]
+            ];
+            if (isset($parts[2]) && !empty($parts[2])) {
+                $variablesArray[$parts[1]]['visibility'] = $parts[2];
+            }
         }
         if (sizeof($variablesArray) == 0) {
             throw new Exception('Missed variable argument');
         }
-        $generator = new EntityGenerator($className, $nameSpace, $variablesArray);
+        $generator = new EntityClassGenerator($className, $nameSpace, $variablesArray);
         $directory = getcwd() .'/'.$this->getPath($fqcn);
         if (is_dir($directory) && !is_writable($directory)) {
             throw new Exception(sprintf('The "%s" directory is not writable', $directory));
@@ -89,7 +95,7 @@ class DDxCommand extends Command
         if (!is_dir($directory)) {
             mkdir($directory, 0777, true);
         }
-	// TODO: Implement file name customization
+	    // TODO: Implement file name customization
         file_put_contents($directory.'/'.$className.'.php', $generator->generate());
         return "Done!";
     }
