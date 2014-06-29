@@ -65,7 +65,6 @@ class Variable implements \ArrayAccess
                 return 'integer';
 
             case 'double':
-            case 'real':
             case 'decimal':
             case 'float':
                 return 'float';
