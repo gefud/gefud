@@ -5,7 +5,8 @@
         "mandango/mondator": "dev-master",
 	    "symfony/console": "2.6.*@dev",
         "phing/phing": "*",
-        "phpspec/phpspec": "*"
+        "phpspec/phpspec": "*",
+        "behat/behat": "~2.5"
     },
     "license": "MIT",
     "authors": [

@@ -7,15 +7,16 @@ use Prophecy\Argument;
 
 class EntityClassGeneratorSpec extends ObjectBehavior
 {
+    const CLASS_NAME = 'Employee';
+    const NAME_SPACE = 'Test\\Entity';
+    public static $variablesArray = [
+        ['name' => 'id', 'type' => 'int'],
+        ['name' => 'name', 'type' => 'string'],
+    ];
+
     function let()
     {
-        $className = 'Employee';
-        $nameSpace = 'Test\\Entity';
-        $variablesArray = [
-            ['name' => 'id', 'type' => 'int'],
-            ['name' => 'name', 'type' => 'string'],
-        ];
-        $this->beConstructedWith($className, $nameSpace, $variablesArray);
+        $this->beConstructedWith(self::CLASS_NAME, self::NAME_SPACE, self::$variablesArray);
     }
 
     function it_is_initializable()
@@ -23,8 +24,11 @@ class EntityClassGeneratorSpec extends ObjectBehavior
         $this->shouldHaveType('DDx\Generator\Entity\EntityClassGenerator');
     }
 
-    function it_shoult_generate_generate_class_definition()
+    function it_should_generate_generate_class_definition()
     {
-        $this->create()->shouldBeAnInstanceOf('\Mandango\Mondator\Definition\Definition');
+        $definition = $this->create();
+        $definition->shouldBeAnInstanceOf('\Mandango\Mondator\Definition\Definition');
+        $definition->getClassName()->shouldBe(self::CLASS_NAME);
+        $definition->getNameSpace()->shouldBe(self::NAME_SPACE);
     }
 }

@@ -1,9 +1,10 @@
-vendor
-composer.lock
 .idea
-composer.phar
 build/coverage
 build/logs
 build/docs
+bin/behat
 bin/phing
 bin/phpspec
+vendor
+composer.lock
+composer.phar
