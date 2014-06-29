@@ -9,6 +9,7 @@
 namespace DDx\Console;
 
 use DDx\Generator\Entity\EntityClassGenerator;
+use DDx\Helper\VariableCollection;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -35,12 +36,12 @@ class DDxCommand extends Command
                 InputArgument::IS_ARRAY,
                 'Specify your variables!'
             )
-	    ->addOption(
-		'file',
-		null,
-		InputOption::VALUE_OPTIONAL,
-		'Specify destination file name'
-	    );
+            ->addOption(
+                'file',
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'Specify destination file name'
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -71,21 +72,14 @@ class DDxCommand extends Command
     {
         $className = $this->getClassName($fqcn);
         $nameSpace = $this->getNameSpace($fqcn);
-        $variablesArray = array();
+        $variableCollection = new VariableCollection();
         foreach ($variables as $variableString) {
-            $parts = explode(':', $variableString);
-            $variablesArray[$parts[1]] = [
-                'name' => $parts[1],
-                'type' => $parts[0]
-            ];
-            if (isset($parts[2]) && !empty($parts[2])) {
-                $variablesArray[$parts[1]]['visibility'] = $parts[2];
-            }
+            $variableCollection->addFromStringNotation($variableString);
         }
-        if (sizeof($variablesArray) == 0) {
+        if (count($variableCollection) == 0) {
             throw new Exception('Missed variable argument');
         }
-        $generator = new EntityClassGenerator($className, $nameSpace, $variablesArray);
+        $generator = new EntityClassGenerator($className, $nameSpace, $variableCollection);
         $directory = getcwd() .'/'.$this->getPath($fqcn);
         if (is_dir($directory) && !is_writable($directory)) {
             throw new Exception(sprintf('The "%s" directory is not writable', $directory));

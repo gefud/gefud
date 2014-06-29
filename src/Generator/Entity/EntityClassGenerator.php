@@ -8,21 +8,31 @@
  */
 namespace DDx\Generator\Entity;
 
+use DDx\Helper\VariableCollection;
+use DDx\Generator\GeneratorAware;
 use Mandango\Mondator\Definition\Definition;
 use Mandango\Mondator\Definition\Method;
-use DDx\Generator\GeneratorAware;
 
 class EntityClassGenerator extends GeneratorAware
 {
+    /**
+     * @var string Entity class name
+     */
     private $className;
+    /**
+     * @var string Entity name space
+     */
     private $nameSpace;
-    private $variablesArray = [];
+    /**
+     * @var VariableCollection Entity variables definition
+     */
+    private $variableCollection;
 
-    public function __construct($className, $nameSpace, $variablesArray)
+    public function __construct($className, $nameSpace, $variableCollection)
     {
         $this->className = $className;
         $this->nameSpace = $nameSpace;
-        $this->variablesArray = $variablesArray;
+        $this->variableCollection = $variableCollection;
     }
 
     public function create()
@@ -46,7 +56,7 @@ class EntityClassGenerator extends GeneratorAware
 
     private function extractProperties()
     {
-        $properties = EntityPropertyGenerator::createFromArray($this->variablesArray);
+        $properties = EntityPropertyGenerator::createFromCollection($this->variableCollection);
         return $properties;
     }
 
@@ -54,7 +64,7 @@ class EntityClassGenerator extends GeneratorAware
     {
         $methods = [];
 
-        $constructor = new EntityMethodConstructorGenerator($this->className, $this->variablesArray);
+        $constructor = new EntityMethodConstructorGenerator($this->className, $this->variableCollection);
         $methods[] = $constructor->create();
 
 //        foreach ($this->variablesArray as $name => $type) {

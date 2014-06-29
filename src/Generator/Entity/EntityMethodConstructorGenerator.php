@@ -8,20 +8,25 @@
  */
 namespace DDx\Generator\Entity;
 
-use Mandango\Mondator\Definition\Method;
+use DDx\Helper\Variable;
+use DDx\Helper\VariableCollection;
 use DDx\Generator\GeneratorAware;
+use Mandango\Mondator\Definition\Method;
 
 class EntityMethodConstructorGenerator extends GeneratorAware
 {
     private $className;
-    private $variablesArray = array();
+    private $variableCollection = array();
 
-    public function __construct($className, array $variablesArray)
+    public function __construct($className, VariableCollection $variableCollection)
     {
         $this->className = $className;
-        $this->variablesArray = $variablesArray;
+        $this->variableCollection = $variableCollection;
     }
 
+    /**
+     * @return Method
+     */
     public function create()
     {
         $arguments = [];
@@ -32,15 +37,17 @@ class EntityMethodConstructorGenerator extends GeneratorAware
      *
 
 EOF;
-        foreach ($this->variablesArray as $variable) {
-            // Setting argument name
-            $arguments[] = '$' . $variable['name'];
-            // Setting code
+        /** @var Variable $variable */
+        foreach ($this->variableCollection as $variable) {
+            if ($variable->isScalarType()) {
+                $arguments[] = '$' . $variable->getName();
+            } else {
+                $arguments[] = $variable->getType() . ' $' . $variable->getName();
+            }
             $code .= <<<EOF
         \$this->${variable['name']} = \$${variable['name']};
 
 EOF;
-            // Setting parameter doc comment
             $ucName = ucfirst($variable['name']);
             $docComment .= <<<EOF
      * @param ${variable['type']} \$${variable['name']} $ucName value

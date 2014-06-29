@@ -2,6 +2,7 @@
 
 namespace spec\DDx\Generator\Entity;
 
+use DDx\Helper\VariableCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -10,13 +11,17 @@ class EntityClassGeneratorSpec extends ObjectBehavior
     const CLASS_NAME = 'Employee';
     const NAME_SPACE = 'Test\\Entity';
     public static $variablesArray = [
-        ['name' => 'id', 'type' => 'int'],
-        ['name' => 'name', 'type' => 'string'],
+        'id:int',
+        'name:string',
     ];
 
     function let()
     {
-        $this->beConstructedWith(self::CLASS_NAME, self::NAME_SPACE, self::$variablesArray);
+        $variableCollection = new VariableCollection();
+        foreach (self::$variablesArray as $variableString) {
+            $variableCollection->addFromStringNotation($variableString);
+        }
+        $this->beConstructedWith(self::CLASS_NAME, self::NAME_SPACE, $variableCollection);
     }
 
     function it_is_initializable()

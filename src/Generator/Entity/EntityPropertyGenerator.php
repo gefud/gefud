@@ -8,6 +8,8 @@
  */
 namespace DDx\Generator\Entity;
 
+use DDx\Helper\Variable;
+use DDx\Helper\VariableCollection;
 use Mandango\Mondator\Definition\Property;
 use DDx\Generator\GeneratorAware;
 
@@ -67,16 +69,15 @@ EOF
 
     /**
      * Batch create of properties from variables array
-     * TODO: replace variablesArray to object representation
-     * @param array $variablesArray Array of variable definition
+     * @param VariableCollection $variableCollection Array of variable definition
      * @return array Array of created properties
      */
-    public static function createFromArray(array $variablesArray)
+    public static function createFromCollection(VariableCollection $variableCollection)
     {
         $properties = [];
-        foreach ($variablesArray as $variable) {
-            $visibility = array_key_exists('visibility', $variable) ? $variable['visibility'] : self::DEFAULT_VISIBILITY;
-            $property = new self($variable['name'], $variable['type'], $visibility);
+        /** @var Variable $variable */
+        foreach ($variableCollection as $variable) {
+            $property = new self($variable->getName(), $variable->getType(), $variable->getVisibility());
             $properties[] = $property->create();
         }
 
