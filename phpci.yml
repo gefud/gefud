@@ -18,9 +18,11 @@ setup:
 #          config_file: "build.properties"
 
 test:
-    php_unit:
-        directory: "test/unit/"
-        args: "--bootstrap 'test/bootstrap.php'"
+    php_spec:
+        args: ~
+#    php_unit:
+#        directory: "test/unit/"
+#        args: "--bootstrap 'test/bootstrap.php'"
     php_mess_detector:
         allow_failures: true
     php_cpd:
@@ -34,7 +36,7 @@ test:
 failure:
   email:
     committer: true
-    cc: ["php-ci@brzuchalski.com"]
+#    cc: ["php-ci@brzuchalski.com"]
 
 #success:
 #    phing:
