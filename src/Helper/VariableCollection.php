@@ -52,7 +52,7 @@ class VariableCollection implements IteratorAggregate, Countable
             $visibility = array_key_exists('visibility', $match) ? $match['visibility'] : null;
             $this->add($match['name'], $match['type'], $value, $visibility);
         } else {
-            throw new InvalidArgumentException(sprintf("Unknown variable definition format, given: %s", $definition));
+            throw new InvalidArgumentException("Unknown variable definition format, given: $definition");
         }
     }
 

@@ -182,6 +182,6 @@ class Variable implements \ArrayAccess
      */
     public function offsetUnset($offset)
     {
-        throw new \LogicException("Variable properties cannot be unset");
+        throw new \LogicException("Variable properties cannot be unset, trying to unset: $offset property");
     }
 }
