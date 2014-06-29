@@ -2,19 +2,18 @@
 /**
  * DDx
  *
- * @copyright   Copyright (c) 2014, Notilio (notilio.com)
+ * @copyright   Copyright (c) 2014, Michał Brzuchalski
  * @license     http://opensource.org/licenses/MIT
  * @author      Michał Brzuchalski <m.brzuchalski@notilio.com>
  */
+namespace DDx\Console;
 
-namespace Notilio\DDx\Console;
-
+use DDx\Generator\Entity\EntityClassGenerator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Notilio\DDx\Generator\EntityClassGenerator;
 use Exception;
 
 /**
@@ -46,7 +45,6 @@ class DDxCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $dialog = $this->getHelperSet()->get('dialog');
         $className = $this->getClassName($input->getArgument('fqcn'));
         $path = $this->getPath($input->getArgument('fqcn'));
         $output->writeln("Creating a new entity called $className in $path...");

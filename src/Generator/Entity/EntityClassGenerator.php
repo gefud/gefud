@@ -1,9 +1,16 @@
 <?php
-namespace Notilio\DDx\Generator;
+/**
+ * DDx
+ *
+ * @copyright   Copyright (c) 2014, Michał Brzuchalski
+ * @license     http://opensource.org/licenses/MIT
+ * @author      Michał Brzuchalski <m.brzuchalski@notilio.com>
+ */
+namespace DDx\Generator\Entity;
 
 use Mandango\Mondator\Definition\Definition;
 use Mandango\Mondator\Definition\Method;
-use Mandango\Mondator\Dumper;
+use DDx\Generator\GeneratorAware;
 
 class EntityClassGenerator extends GeneratorAware
 {
@@ -50,13 +57,13 @@ class EntityClassGenerator extends GeneratorAware
         $constructor = new EntityMethodConstructorGenerator($this->className, $this->variablesArray);
         $methods[] = $constructor->create();
 
-        foreach ($this->variablesArray as $name => $type) {
-            $methods[] = $this->createGetter($name, $type);
-            if ($name == 'id') {
-            continue;
-            }
-            $methods[] = $this->createSetter($name, $type);
-        }
+//        foreach ($this->variablesArray as $name => $type) {
+//            $methods[] = $this->createGetter($name, $type);
+//            if ($name == 'id') {
+//            continue;
+//            }
+//            $methods[] = $this->createSetter($name, $type);
+//        }
         return $methods;
     }
 

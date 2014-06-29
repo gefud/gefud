@@ -1,9 +1,11 @@
 {
-    "name": "notilio/ddx",
-    "description": "Domain Driven Generator",
+    "name": "ddx/ddx",
+    "description": "Domain Driven Design Generator",
     "require": {
         "mandango/mondator": "dev-master",
-	"symfony/console": "2.6.*@dev"
+	    "symfony/console": "2.6.*@dev",
+        "phing/phing": "*",
+        "phpspec/phpspec": "*"
     },
     "license": "MIT",
     "authors": [
@@ -15,11 +17,14 @@
     "keywords": [
         "dto",
         "ddd",
+        "domain",
+        "driven",
+        "design",
         "generator"
     ],
     "autoload": {
         "psr-4": {
-            "Notilio\\DDx\\": "src/"
+            "DDx\\": "src/"
         }
     },
     "config": {

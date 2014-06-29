@@ -1,14 +1,15 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: mbrzuchalski
- * Date: 28.06.14
- * Time: 11:39
+ * DDx
+ *
+ * @copyright   Copyright (c) 2014, Michał Brzuchalski
+ * @license     http://opensource.org/licenses/MIT
+ * @author      Michał Brzuchalski <m.brzuchalski@notilio.com>
  */
-
-namespace Notilio\DDx\Generator;
+namespace DDx\Generator\Entity;
 
 use Mandango\Mondator\Definition\Method;
+use DDx\Generator\GeneratorAware;
 
 class EntityMethodConstructorGenerator extends GeneratorAware
 {

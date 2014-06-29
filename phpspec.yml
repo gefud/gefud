@@ -1,0 +1,4 @@
+suites:
+    ddx:
+        namespace: DDx
+        src_path: src
