@@ -59,22 +59,19 @@ class Variable implements \ArrayAccess
      */
     public function getType()
     {
-        switch (strtolower($this->type)) {
-            case 'int':
-            case 'integer':
+        $type = strtolower($this->type);
+        switch (true) {
+            case in_array($type, ['int', 'integer']):
                 return 'integer';
 
-            case 'double':
-            case 'decimal':
-            case 'float':
+            case in_array($type, ['double', 'decimal', 'float']):            
                 return 'float';
 
-            case 'bool':
-            case 'boolean':
+            case in_array($type, ['bool', 'boolean']):    
                 return 'boolean';
 
-            case 'array':
-                return 'array';
+	    case in_array($type, ['array', 'string']):
+                return $type;
 
             default:
                 if (class_exists($this->type)) {
@@ -93,6 +90,15 @@ class Variable implements \ArrayAccess
     {
         $scalarTypes = ['integer', 'float', 'boolean', 'array'];
         return in_array($this->getType(), $scalarTypes);
+    }
+
+    /**
+     * Check if variable is unknown type
+     * @return bool
+     */
+    public function isUnknownType()
+    {
+        return $this->getType() == 'unknown';
     }
 
     /**

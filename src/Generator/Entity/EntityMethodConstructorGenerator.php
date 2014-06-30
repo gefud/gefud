@@ -39,7 +39,7 @@ class EntityMethodConstructorGenerator extends GeneratorAware
 EOF;
         /** @var Variable $variable */
         foreach ($this->variableCollection as $variable) {
-            if ($variable->isScalarType()) {
+            if ($variable->isScalarType() || $variable->isUnknownType()) {
                 $arguments[] = '$' . $variable->getName();
             } else {
                 $arguments[] = $variable->getType() . ' $' . $variable->getName();
