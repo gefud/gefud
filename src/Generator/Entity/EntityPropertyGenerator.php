@@ -1,21 +1,21 @@
 <?php
 /**
- * DDx
+ * Gefud
  *
  * @copyright   Copyright (c) 2014, Michał Brzuchalski
  * @license     http://opensource.org/licenses/MIT
- * @author      Michał Brzuchalski <m.brzuchalski@notilio.com>
+ * @author      Michał Brzuchalski <michal.brzuchalski@gmail.com>
  */
-namespace DDx\Generator\Entity;
+namespace Gefud\Generator\Entity;
 
-use DDx\Helper\Variable;
-use DDx\Helper\VariableCollection;
+use Gefud\Helper\Variable;
+use Gefud\Helper\VariableCollection;
 use Mandango\Mondator\Definition\Property;
-use DDx\Generator\GeneratorAware;
+use Gefud\Generator\GeneratorAware;
 
 /**
  * Class EntityPropertyGenerator provides creation of DDD entity->property snippet
- * @package DDx\Generator\Entity
+ * @package Gefud\Generator\Entity
  */
 class EntityPropertyGenerator extends GeneratorAware
 {

@@ -10,39 +10,20 @@ setup:
     composer:
         action: "install"
         prefer_dist: false
-#    phing:
-#        build_file: 'build.xml'
-#        targets:
-#          - "ci:run-tests"
-#        properties:
-#          config_file: "build.properties"
 
 test:
     php_spec:
-        args: ~
-#    php_unit:
-#        directory: "test/unit/"
-#        args: "--bootstrap 'test/bootstrap.php'"
+        path: "spec"
     php_mess_detector:
+        path: "src"
         allow_failures: true
     php_cpd:
+        path: "src"
         allow_failures: true
     php_code_sniffer:
-        path: "apps"
-#        ignore:
-#            - "apps/views"
+        path: "src"
         standard: "PSR1,PSR2"
 
 failure:
-  email:
-    committer: true
-#    cc: ["php-ci@brzuchalski.com"]
-
-#success:
-#    phing:
-#        build_file: 'build.xml'
-#        targets:
-#          - "deploy:test"
-#        properties:
-#          config_file: "build.properties"
-
+    email:
+        committer: true

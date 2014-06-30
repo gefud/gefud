@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Notilio\DDx - PHP Coding Quality Tools" basedir="../">
+<project name="Gefud - PHP Coding Quality Tools" basedir="../">
   
     <target name="phpcs" description="Find all coding standard violations ERRORS using PHP_CodeSniffer">
         <exec executable="bin/phpcs">

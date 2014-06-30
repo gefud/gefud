@@ -1,6 +1,6 @@
 {
-    "name": "ddx/ddx",
-    "description": "Domain Driven Design Generator",
+    "name": "gefud/gefud",
+    "description": "Generator for Entities, Factories and their Usecases in Ddd",
     "require": {
         "mandango/mondator": "dev-master",
 	    "symfony/console": "2.6.*@dev",
@@ -25,7 +25,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "DDx\\": "src/"
+            "Gefud\\": "src/"
         }
     },
     "config": {
@@ -33,6 +33,6 @@
         "bin-dir": "bin/"
     },
     "bin": [
-        "bin/ddx"
+        "bin/gefud"
     ]
 }

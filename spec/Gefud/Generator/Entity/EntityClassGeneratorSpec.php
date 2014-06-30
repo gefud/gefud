@@ -1,8 +1,8 @@
 <?php
 
-namespace spec\DDx\Generator\Entity;
+namespace spec\Gefud\Generator\Entity;
 
-use DDx\Helper\VariableCollection;
+use Gefud\Helper\VariableCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -26,7 +26,7 @@ class EntityClassGeneratorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('DDx\Generator\Entity\EntityClassGenerator');
+        $this->shouldHaveType('Gefud\Generator\Entity\EntityClassGenerator');
     }
 
     function it_should_generate_generate_class_definition()

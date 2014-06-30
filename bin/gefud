@@ -8,9 +8,9 @@ if (file_exists($autoload)) {
     require dirname(dirname(__FILE__)) .'/vendor/autoload.php';
 }
 
-use DDx\Console\DDxCommand;
+use Gefud\Console\GefudEntityGenerateCommand;
 use Symfony\Component\Console\Application;
 
 $application = new Application('Domain Driven Entity Generator', '0.1');
-$application->add(new DDxCommand);
+$application->add(new GefudEntityGenerateCommand);
 $application->run();

@@ -1,12 +1,12 @@
 <?php
 /**
- * DDx
+ * Gefud
  *
  * @copyright   Copyright (c) 2014, Michał Brzuchalski
  * @license     http://opensource.org/licenses/MIT
- * @author      Michał Brzuchalski <m.brzuchalski@notilio.com>
+ * @author      Michał Brzuchalski <michal.brzuchalski@gmail.com>
  */
-namespace DDx\Generator;
+namespace Gefud\Generator;
 
 interface GeneratorInterface
 {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Notilio\DDx" default="help">
+<project name="Gefud" default="help">
     <import file="build/code-quality.xml" />
     <import file="build/composer.xml" />
     <import file="build/testing.xml" />
@@ -61,7 +61,7 @@
             <arg value="--target" />
             <arg path="build/docs" />
             <arg value="--title" />
-            <arg value="Notilio\DDx" />
+            <arg value="Gefud" />
             <arg value="--ignore" />
             <arg value="tests/*" />
         </exec>

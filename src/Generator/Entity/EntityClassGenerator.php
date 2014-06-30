@@ -1,15 +1,15 @@
 <?php
 /**
- * DDx
+ * Gefud
  *
  * @copyright   Copyright (c) 2014, Michał Brzuchalski
  * @license     http://opensource.org/licenses/MIT
- * @author      Michał Brzuchalski <m.brzuchalski@notilio.com>
+ * @author      Michał Brzuchalski <michal.brzuchalski@gmail.com>
  */
-namespace DDx\Generator\Entity;
+namespace Gefud\Generator\Entity;
 
-use DDx\Helper\VariableCollection;
-use DDx\Generator\GeneratorAware;
+use Gefud\Helper\VariableCollection;
+use Gefud\Generator\GeneratorAware;
 use Mandango\Mondator\Definition\Definition;
 use Mandango\Mondator\Definition\Method;
 

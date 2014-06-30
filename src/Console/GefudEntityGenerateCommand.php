@@ -1,15 +1,15 @@
 <?php
 /**
- * DDx
+ * Gefud
  *
  * @copyright   Copyright (c) 2014, Michał Brzuchalski
  * @license     http://opensource.org/licenses/MIT
- * @author      Michał Brzuchalski <m.brzuchalski@notilio.com>
+ * @author      Michał Brzuchalski <michal.brzuchalski@gmail.com>
  */
-namespace DDx\Console;
+namespace Gefud\Console;
 
-use DDx\Generator\Entity\EntityClassGenerator;
-use DDx\Helper\VariableCollection;
+use Gefud\Generator\Entity\EntityClassGenerator;
+use Gefud\Helper\VariableCollection;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -20,7 +20,7 @@ use Exception;
 /**
  * @package    DTOx\TestGenerator
  */
-class DDxCommand extends Command
+class GefudEntityGenerateCommand extends Command
 {
     protected function configure()
     {
