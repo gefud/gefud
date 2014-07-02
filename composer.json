@@ -1,12 +1,19 @@
 {
     "name": "gefud/gefud",
     "description": "Generator for Entities, Factories and their Usecases in Ddd",
-    "require": {
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/gefud/generator"
+        }
+    ],
+    "require-dev": {
         "mandango/mondator": "dev-master",
-	    "symfony/console": "2.6.*@dev",
+	"symfony/console": "2.6.*@dev",
         "phing/phing": "*",
         "phpspec/phpspec": "*",
-        "behat/behat": "~2.5"
+        "behat/behat": "~2.5",
+	"gefud/generator": "dev-master"
     },
     "license": "MIT",
     "authors": [
