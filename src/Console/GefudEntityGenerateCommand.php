@@ -10,12 +10,14 @@ namespace Gefud\Console;
 
 use Gefud\Generator\Entity\EntityClassGenerator;
 use Gefud\Helper\VariableCollection;
+use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Exception;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * @package    DTOx\TestGenerator
@@ -46,6 +48,15 @@ class GefudEntityGenerateCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+
+        $config = Yaml::parse('gefud.yml');
+        $processor = new Processor();
+        $configuration = new ProjectConfiguration();
+        $processedConfiguration = $processor->processConfiguration(
+            $configuration,
+            [$config]
+        );
+        //print_r($processedConfiguration);die();
         $className = $this->getClassName($input->getArgument('fqcn'));
         $path = $this->getPath($input->getArgument('fqcn'));
         $output->writeln("Creating a new entity called $className in $path...");

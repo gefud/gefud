@@ -29,7 +29,7 @@ class EntityClassGeneratorSpec extends ObjectBehavior
         $this->shouldHaveType('Gefud\Generator\Entity\EntityClassGenerator');
     }
 
-    function it_should_generate_generate_class_definition()
+    function it_should_generate_class_definition_object()
     {
         $definition = $this->create();
         $definition->shouldBeAnInstanceOf('\Mandango\Mondator\Definition\Definition');

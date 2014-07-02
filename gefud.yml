@@ -1,0 +1,7 @@
+defaults:
+    src_path: src
+    namespace: Test
+
+entities:
+    Test\Entity\Employee:
+        factory: true
